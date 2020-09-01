@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "471849729571",
+    "firebase_url": "https://ceylonsupr-e541f.firebaseio.com",
+    "project_id": "ceylonsupr-e541f",
+    "storage_bucket": "ceylonsupr-e541f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:471849729571:android:f9c9374fe7626fb6427b96",
+        "android_client_info": {
+          "package_name": "com.ceylonsupr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "471849729571-pq7ghhakjn2rknr4hhd1452qf0g5tn27.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ceylonsupr",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "471849729571-seh5u5rqqg0h91a8k8pc9c9md19nmi8t.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.ceylonsupr",
+            "certificate_hash": "afc743df9dd713b533dbc8c15b48d1897f2a4b59"
+          }
+        },
+        {
+          "client_id": "471849729571-183k5qvrvj8dnkqcm00qq6n1suo64so2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA7Tr-cSYeG8721-Z7m9M1tr53WUIl75Vk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "471849729571-183k5qvrvj8dnkqcm00qq6n1suo64so2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
