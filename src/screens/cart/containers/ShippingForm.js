@@ -23,43 +23,54 @@ class ShippingAddress extends React.Component {
 
     return (
       <View>
-        <Row style={styles.row}>
-          <Col>
-            <Input
-              error={errors && errors.get('first_name')}
-              label={t('inputs:text_first_name')}
-              value={data.get('first_name')}
-              onChangeText={value => onChange('first_name', value)}
-            />
-          </Col>
-          <Col>
-            <Input
-              error={errors && errors.get('last_name')}
-              label={t('inputs:text_last_name')}
-              value={data.get('last_name')}
-              onChangeText={value => onChange('last_name', value)}
-            />
-          </Col>
-        </Row>
+        {/*<Row style={styles.row}>*/}
+        {/*  <Col>*/}
+        {/*    <Input*/}
+        {/*      error={errors && errors.get('first_name')}*/}
+        {/*      label={t('inputs:text_first_name')}*/}
+        {/*      value={data.get('first_name')}*/}
+        {/*      onChangeText={value => onChange('first_name', value)}*/}
+        {/*    />*/}
+        {/*  </Col>*/}
+        {/*  <Col>*/}
+        {/*    <Input*/}
+        {/*      error={errors && errors.get('last_name')}*/}
+        {/*      label={t('inputs:text_last_name')}*/}
+        {/*      value={data.get('last_name')}*/}
+        {/*      onChangeText={value => onChange('last_name', value)}*/}
+        {/*    />*/}
+        {/*  </Col>*/}
+        {/*</Row>*/}
+
+        {/*<Row style={styles.row}>*/}
+        {/*  <Col>*/}
+        {/*    <Input*/}
+        {/*      label={t('inputs:text_company')}*/}
+        {/*      value={data.get('company')}*/}
+        {/*      onChangeText={value => onChange('company', value)}*/}
+        {/*    />*/}
+        {/*  </Col>*/}
+        {/*</Row>*/}
+
+        {/*<Row style={styles.row}>*/}
+        {/*  <Col>*/}
+        {/*    <InputCountry*/}
+        {/*      error={errors && errors.get('country')}*/}
+        {/*      label={t('inputs:text_country')}*/}
+        {/*      value={data.get('country')}*/}
+        {/*      onChange={onChange}*/}
+        {/*      state={data.get('state')}*/}
+        {/*    />*/}
+        {/*  </Col>*/}
+        {/*</Row>*/}
 
         <Row style={styles.row}>
           <Col>
             <Input
-              label={t('inputs:text_company')}
-              value={data.get('company')}
-              onChangeText={value => onChange('company', value)}
-            />
-          </Col>
-        </Row>
-
-        <Row style={styles.row}>
-          <Col>
-            <InputCountry
-              error={errors && errors.get('country')}
-              label={t('inputs:text_country')}
-              value={data.get('country')}
-              onChange={onChange}
-              state={data.get('state')}
+              error={errors && errors.get('address_2')}
+              label={t('inputs:text_address_2')}
+              value={data.get('address_2')}
+              onChangeText={value => onChange('address_2', value)}
             />
           </Col>
         </Row>
@@ -78,31 +89,20 @@ class ShippingAddress extends React.Component {
         <Row style={styles.row}>
           <Col>
             <Input
-              error={errors && errors.get('address_2')}
-              label={t('inputs:text_address_2')}
-              value={data.get('address_2')}
-              onChangeText={value => onChange('address_2', value)}
-            />
-          </Col>
-        </Row>
-
-        <Row style={styles.row}>
-          <Col>
-            <Input
               error={errors && errors.get('city')}
               label={t('inputs:text_city')}
               value={data.get('city')}
               onChangeText={value => onChange('city', value)}
             />
           </Col>
-          <Col>
-            <Input
-              error={errors && errors.get('postcode')}
-              label={t('inputs:text_postcode')}
-              value={data.get('postcode')}
-              onChangeText={value => onChange('postcode', value)}
-            />
-          </Col>
+          {/*<Col>*/}
+          {/*  <Input*/}
+          {/*    error={errors && errors.get('postcode')}*/}
+          {/*    label={t('inputs:text_postcode')}*/}
+          {/*    value={data.get('postcode')}*/}
+          {/*    onChangeText={value => onChange('postcode', value)}*/}
+          {/*  />*/}
+          {/*</Col>*/}
         </Row>
 
         <Row style={styles.row}>
@@ -126,7 +126,6 @@ class ShippingAddress extends React.Component {
             />
           </Col>
         </Row>
-
       </View>
     );
   }

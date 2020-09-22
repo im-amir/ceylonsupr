@@ -147,8 +147,8 @@ android {
         applicationId "com.ceylonsupr"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionName "1.4.4"
-        versionCode 1588551086
+        versionName "1.4.5"
+        versionCode 1588551087
         multiDexEnabled true
     }
 

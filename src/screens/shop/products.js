@@ -8,9 +8,9 @@ import unescape from 'lodash/unescape';
 
 import {Map, fromJS} from 'immutable';
 
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, TextInput} from 'react-native';
 
-import {Header, ThemedView} from 'src/components';
+import {Header, Icon, ThemeConsumer, ThemedView} from 'src/components';
 import Container from 'src/containers/Container';
 import {TextHeader, IconHeader, CartIcon} from 'src/containers/HeaderComponent';
 import Loading from 'src/containers/Loading/LoadingDefault';
@@ -24,12 +24,16 @@ import CategoryList from './product/CategoryList';
 import {sortBySelector, filterBySelector} from 'src/modules/product/selectors';
 import {languageSelector} from 'src/modules/common/selectors';
 
-import {clearFilter, fetchProducts as clearData} from 'src/modules/product/actions';
+import {
+  clearFilter,
+  fetchProducts as clearData,
+} from 'src/modules/product/actions';
 import {getProducts} from 'src/modules/product/service';
 
-import {margin} from 'src/components/config/spacing';
+import {borderRadius, margin, padding} from 'src/components/config/spacing';
 import {mainStack, homeTabs} from 'src/config/navigator';
 import {categorySelector} from 'src/modules/category/selectors';
+import NavigationServices from '../../utils/navigation';
 
 const findCategory = (categoryId = '', lists = []) => {
   if (!categoryId || !lists || lists.length < 1) {
@@ -40,7 +44,7 @@ const findCategory = (categoryId = '', lists = []) => {
   var category = null;
   var listFlat = lists;
 
-  while(loopWhile && listFlat.length > 0) {
+  while (loopWhile && listFlat.length > 0) {
     const categoryFind = find(listFlat, c => c.id == categoryId);
     if (categoryFind) {
       category = categoryFind;
@@ -81,6 +85,7 @@ class ProductsScreen extends React.Component {
       loadingMore: false,
       data: [],
       page: 1,
+      searchVal: '',
     };
   }
 
@@ -201,46 +206,95 @@ class ProductsScreen extends React.Component {
       navigation,
       screenProps: {t},
     } = this.props;
-    const {category, name, data, loading, loadingMore, refreshing} = this.state;
+    const {
+      category,
+      name,
+      data,
+      loading,
+      loadingMore,
+      refreshing,
+      searchVal,
+    } = this.state;
 
     // const subsCategory = categories.filter(cat => cat.parent === category);
+    let filtered = data;
+    if (searchVal) {
+      filtered = data.filter(item =>
+        item.name.toLowerCase().includes(searchVal.toLowerCase()),
+      );
+    }
+    const dataJS = fromJS(filtered);
+
     return (
-      <ThemedView isFullView>
-        <Header
-          leftComponent={<IconHeader />}
-          centerComponent={<TextHeader title={unescape(name)} />}
-          rightComponent={<CartIcon />}
-        />
-        {loading ? (
-          <Loading />
-        ) : data.length ? (
-          <View style={styles.viewList}>
-            <Container style={styles.viewRefineSwitch}>
-              <Refine onPress={() => navigation.navigate(mainStack.refine, {category: category, data})}/>
-              <SwitchProduct />
-            </Container>
-            <CategoryList
-              onPress={this.handleCategoryPress}
-              data={category && category.categories ? category.categories: null}
+      <ThemeConsumer>
+        {({theme}) => (
+          <ThemedView isFullView>
+            <Header
+              leftComponent={<IconHeader />}
+              centerComponent={<TextHeader title={unescape(name)} />}
+              rightComponent={<CartIcon />}
             />
-            <ProductView
-              data={fromJS(data)}
-              loadingMore={loadingMore}
-              refreshing={refreshing}
-              handleLoadMore={this.handleLoadMore}
-              handleRefresh={this.handleRefresh}
-            />
-          </View>
-        ) : (
-          <Empty
-            icon="box"
-            title={t('empty:text_title_product')}
-            subTitle={t('empty:text_subtitle_product')}
-            titleButton={t('common:text_go_shopping')}
-            clickButton={() => navigation.navigate(homeTabs.shop)}
-          />
+            {loading ? (
+              <Loading />
+            ) : data.length ? (
+              <View style={styles.viewList}>
+                <Container style={styles.viewRefineSwitch}>
+                  <Refine
+                    onPress={() =>
+                      navigation.navigate(mainStack.refine, {
+                        category: category,
+                        data,
+                      })
+                    }
+                  />
+                  <View style={{flex: 1}}>
+                    <Container>
+                      <View
+                        style={[
+                          styles.container,
+                          {
+                            backgroundColor: theme.SearchBar.bgColor,
+                          },
+                        ]}>
+                        <Icon name="search" size={20} />
+                        <TextInput
+                          placeholder="Search"
+                          style={styles.text}
+                          value={searchVal}
+                          onChangeText={searchVal =>
+                            this.setState({searchVal})
+                          }></TextInput>
+                      </View>
+                    </Container>
+                  </View>
+                  <SwitchProduct />
+                </Container>
+                <CategoryList
+                  onPress={this.handleCategoryPress}
+                  data={
+                    category && category.categories ? category.categories : null
+                  }
+                />
+                <ProductView
+                  data={dataJS}
+                  loadingMore={loadingMore}
+                  refreshing={refreshing}
+                  handleLoadMore={this.handleLoadMore}
+                  handleRefresh={this.handleRefresh}
+                />
+              </View>
+            ) : (
+              <Empty
+                icon="box"
+                title={t('empty:text_title_product')}
+                subTitle={t('empty:text_subtitle_product')}
+                titleButton={t('common:text_go_shopping')}
+                clickButton={() => navigation.navigate(homeTabs.shop)}
+              />
+            )}
+          </ThemedView>
         )}
-      </ThemedView>
+      </ThemeConsumer>
     );
   }
 }
@@ -255,6 +309,18 @@ const styles = StyleSheet.create({
   },
   viewList: {
     flex: 1,
+  },
+  container: {
+    height: 46,
+    borderRadius: borderRadius.base,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: padding.large - 1,
+    overflow: 'hidden',
+  },
+  text: {
+    flex: 1,
+    marginLeft: margin.small,
   },
 });
 

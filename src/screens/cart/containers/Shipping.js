@@ -73,8 +73,9 @@ class Shipping extends React.Component {
     if (!selected) {
       errors = errors.set('shipping_lines', 'Please select shipping method!');
     }
-
     if (errors.size) {
+      alert('asd3');
+      console.log(errors)
       this.setState({
         errors,
       });
@@ -93,6 +94,7 @@ class Shipping extends React.Component {
 
   render() {
     const {backStep, shipping, selected, isLogin, t} = this.props;
+    console.log("")
     const {useAsBilling, errors} = this.state;
 
     return (
@@ -125,7 +127,7 @@ class Shipping extends React.Component {
             />
           </View>
           <Heading
-            title={t('cart:text_shipping_method')}
+            title={t('cart: text_shipping_method')}
             containerStyle={styles.textTitle}
           />
 

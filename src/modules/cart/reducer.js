@@ -28,7 +28,7 @@ export const initState = fromJS({
     city: '',
     company: '',
     postcode: '',
-    country: '',
+    country: 'Portugal',
     email: '',
     phone: '',
     note: '',
